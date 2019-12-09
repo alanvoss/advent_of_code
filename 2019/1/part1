@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+perl -lne '$x += int($_ / 3) - 2; END { print $x }' inputs.txt
