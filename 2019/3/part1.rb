@@ -14,10 +14,7 @@ def place_inputs(sparse, instruction_set, id)
       (1..number).each do |n|
         coordinate = [coordinate[0] + this_displacement[0], coordinate[1] + this_displacement[1]]
         new_x, new_y = coordinate
-
-        if !sparse[new_x]
-          sparse[new_x] = {}
-        end
+        sparse[new_x] ||= {}
 
         this_distance = new_x.abs + new_y.abs
         if sparse[new_x][new_y] and (sparse[new_x][new_y] - [id]).length > 0
@@ -26,11 +23,8 @@ def place_inputs(sparse, instruction_set, id)
           end
         end
 
-        if !sparse[new_x][new_y]
-          sparse[new_x][new_y] = [id]
-        else
-          sparse[new_x][new_y].push(id)
-        end
+        sparse[new_x][new_y] ||= []
+        sparse[new_x][new_y].push(id)
       end
     end
   end
